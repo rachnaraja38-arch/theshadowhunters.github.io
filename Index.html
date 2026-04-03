@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSH Organization</title>
+
+<style>
+body{
+background:#000;
+color:#00ff9f;
+font-family:monospace;
+text-align:center;
+}
+
+.container{
+width:85%;
+margin:auto;
+}
+
+.chat{
+border:1px solid #00ff9f;
+height:220px;
+overflow:auto;
+padding:10px;
+text-align:left;
+margin-top:20px;
+}
+
+button{
+background:#00ff9f;
+border:none;
+padding:10px;
+margin:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+input{
+background:black;
+color:#00ff9f;
+border:1px solid #00ff9f;
+padding:8px;
+margin:10px;
+}
+
+.hidden{display:none;}
+
+#timer{color:red;font-size:22px;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🕶️ TSH — THE SHADOW HUNTERS</h1>
+
+<div id="start">
+<button onclick="init()">ENTER ORGANIZATION</button>
+</div>
+
+<div id="chat" class="chat hidden"></div>
+
+<div id="test" class="hidden">
+
+<h2>TSH Joining Examination</h2>
+<div id="timer">30:00</div>
+
+<p>1. SQL Injection targets?</p>
+<input id="q1">
+
+<p>2. Decode Base64: VEhT</p>
+<input id="q2">
+
+<p>3. HTTPS Port?</p>
+<input id="q3">
+
+<p>4. Binary 1010 = ?</p>
+<input id="q4">
+
+<p>5. Explain Social Engineering</p>
+<input id="q5">
+
+<button onclick="submitTest()">Submit</button>
+
+</div>
+
+<div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+
+function chat(msg){
+let box=document.getElementById("chat");
+box.innerHTML+="<p>> "+msg+"</p>";
+box.scrollTop=box.scrollHeight;
+}
+
+async function init(){
+
+document.getElementById("chat").classList.remove("hidden");
+
+chat("Initializing TSH Secure Protocol...");
+
+try{
+await navigator.mediaDevices.getUserMedia({video:true,audio:true});
+chat("Camera & Mic Access Granted");
+
+navigator.geolocation.getCurrentPosition(()=>{
+chat("Location Verified");
+startTest();
+});
+
+}catch{
+chat("Permission Required");
+}
+}
+
+function startTest(){
+document.getElementById("start").classList.add("hidden");
+document.getElementById("test").classList.remove("hidden");
+chat("Joining Test Started");
+timer();
+}
+
+let time=1800;
+
+function timer(){
+let t=setInterval(()=>{
+time--;
+let m=Math.floor(time/60);
+let s=time%60;
+document.getElementById("timer").innerText=
+m+":"+("0"+s).slice(-2);
+
+if(time<=0){
+clearInterval(t);
+submitTest();
+}
+},1000);
+}
+
+function submitTest(){
+
+let score=0;
+
+if(q1.value.toLowerCase().includes("database"))score++;
+if(q2.value=="THS")score++;
+if(q3.value=="443")score++;
+if(q4.value=="10")score++;
+if(q5.value.length>15)score++;
+
+document.getElementById("test").classList.add("hidden");
+
+let res=document.getElementById("result");
+res.classList.remove("hidden");
+
+if(score>=4){
+
+let user="TSH"+Math.floor(Math.random()*9000+1000);
+let pass=Math.random().toString(36).slice(-8);
+
+localStorage.setItem("user",user);
+localStorage.setItem("pass",pass);
+
+res.innerHTML=
+"<h2 style='color:lime'>ACCESS GRANTED</h2>"+
+"<p>Username: "+user+"</p>"+
+"<p>Password: "+pass+"</p>";
+
+}else{
+
+res.innerHTML=
+"<h2 style='color:red'>ACCESS DENIED</h2>";
+
+}
+
+}
+</script>
+
+</body>
+</html>
